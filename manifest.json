@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "syncthing-status.widget",
+  "name": "Syncthing",
+  "version": "1.0.0",
+  "author": "omarchy-syncthing contributors",
+  "license": "MIT",
+  "description": "Syncthing status in the Omarchy bar: folders, devices, start/stop/restart, rescan, and quick access to the web UI or a TUI.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Syncthing",
+    "description": "Sync state, folders and devices, with service controls.",
+    "category": "Files",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "refreshIntervalSec": 15,
+      "serviceUnit": "syncthing.service",
+      "webUiMode": "Web app",
+      "tuiCommand": "",
+      "configPath": ""
+    },
+    "schema": [
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "description": "How often to poll while idle. The widget polls every 2 seconds while the panel is open or a folder is syncing.",
+        "min": 5,
+        "max": 3600,
+        "step": 5,
+        "defaultValue": 15
+      },
+      {
+        "key": "serviceUnit",
+        "type": "string",
+        "label": "systemd user unit",
+        "description": "The user unit that start, stop and restart act on.",
+        "defaultValue": "syncthing.service"
+      },
+      {
+        "key": "webUiMode",
+        "type": "enum",
+        "label": "Open the web UI as",
+        "options": ["Web app", "Browser tab"],
+        "defaultValue": "Web app"
+      },
+      {
+        "key": "tuiCommand",
+        "type": "string",
+        "label": "TUI command",
+        "description": "Command to run in a terminal from the panel, e.g. stc. Leave empty to follow the Syncthing service log instead.",
+        "defaultValue": ""
+      },
+      {
+        "key": "configPath",
+        "type": "path",
+        "label": "Syncthing config.xml",
+        "description": "Optional. Found automatically in ~/.local/state/syncthing or ~/.config/syncthing.",
+        "defaultValue": ""
+      }
+    ]
+  }
+}
